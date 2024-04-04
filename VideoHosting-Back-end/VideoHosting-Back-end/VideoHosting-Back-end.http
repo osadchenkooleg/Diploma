@@ -1,6 +1,0 @@
-@VideoHosting_Back_end_HostAddress = http://localhost:5009
-
-GET {{VideoHosting_Back_end_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
