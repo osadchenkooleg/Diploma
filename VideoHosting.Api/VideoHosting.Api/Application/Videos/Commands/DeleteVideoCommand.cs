@@ -22,8 +22,9 @@ public class DeleteVideoCommand : IRequest<Response<Unit>>
 
     public class Handler : BaseHandler<DeleteVideoCommand, Unit>
     {
-        private const string VideosPhotos = "UsersContent/VideosPhotos/";
-        private const string UsersVideos = "UsersContent/UsersVideos/";
+        protected static string TargetDir => $@"{Directory.GetCurrentDirectory()}\wwwroot\";
+        private const string VideoImagePath = "videoimages";
+        private const string VideoPath = "videos";
 
         public Handler(IUnitOfWork unit) : base(unit)
         {
@@ -45,10 +46,15 @@ public class DeleteVideoCommand : IRequest<Response<Unit>>
             Unit.VideoRepository.RemoveVideo(video);
             await Unit.SaveAsync();
 
-            File.Delete(Path.Combine(Directory.GetCurrentDirectory(), VideosPhotos + videoModel.PhotoPath));
-            File.Delete(Path.Combine(Directory.GetCurrentDirectory(), UsersVideos + videoModel.VideoPath));
+            if (File.Exists(CreatePath(VideoImagePath, videoModel.PhotoPath)))
+                await Task.Run(() => File.Delete(CreatePath(VideoImagePath, videoModel.PhotoPath)));
+
+            if (File.Exists(CreatePath(VideoPath, videoModel.VideoPath)))
+                await Task.Run(() => File.Delete(CreatePath(VideoPath, videoModel.VideoPath)));
             
             return Success(new Unit());
         }
+
+        private string CreatePath(string folder ,string fileName) => $"{TargetDir}{folder}\\{fileName}";
     }
 }

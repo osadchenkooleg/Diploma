@@ -42,6 +42,12 @@ public class CreateVideoCommand : IRequest<Response<string[]>>
             var videoPath = string.Empty;
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
+            var user = await Unit.UserRepository.GetUserById(model.UserId);
+            if (user == null)
+            {
+                throw new ProblemDetailsException(StatusCodes.Status404NotFound, "Logged in user not found");
+            }
+
             for (var i = 0; i < 2; i++)
             {
                 var save = Guid.NewGuid().ToString();
@@ -83,13 +89,7 @@ public class CreateVideoCommand : IRequest<Response<string[]>>
                     await fs.WriteAsync(bytes, cancellationToken);
                 }
             }
-
-            var user = await Unit.UserRepository.GetUserById(request.Model.UserId);
-            if (user == null)
-            {
-                throw new ProblemDetailsException(StatusCodes.Status404NotFound, "Logged in user not found");
-            }
-
+            
             var video = new Video
             {
                 Name = request.Model.Name,
