@@ -1,0 +1,31 @@
+<div class="login-component">
+  @if (!isLoggedIn) {
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-content class="content">
+        <div class="login-form">
+          <mat-form-field class="email-form-field">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput placeholder="email" #email>
+          </mat-form-field>
+          <mat-form-field class="password-form-field">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput #password>
+          </mat-form-field>
+          @if (error) {
+            <p class="error">
+              {{ error }}
+            </p>
+          } 
+        </div>
+        
+        <div class="buttons">
+          <button mat-flat-button color="primary" (click)='login(email.value, password.value)'>Login</button>
+    
+          <button mat-stroked-button color="primary" [routerLink]="['/register']" 
+                routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">Register</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

@@ -9,9 +9,7 @@ public class CommentaryApplyModel
 
     [Required]
     public string Content { get; set; }
-
-    public DateTime DayOfCreation { get; set; }
-
+    
     [Required]
     public Guid VideoId { get; set; }
 }

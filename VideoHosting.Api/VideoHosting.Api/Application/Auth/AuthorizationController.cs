@@ -10,7 +10,7 @@ using VideoHosting.Api.Common;
 namespace VideoHosting.Api.Application.Auth;
 
 [ApiController]
-[Route("account")]
+[Route("api/account")]
 [AllowAnonymous]
 public class AuthorizationController : BaseController
 {

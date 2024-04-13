@@ -36,7 +36,7 @@ public class CommentaryController : BaseController
     }
 
     [HttpDelete]
-    [Route("Commentaries/{id}")]
+    [Route("Commentary/{id}")]
     public async Task<IActionResult> DeleteCommentary(Guid id)
     {
         var loggedInUser = User.Identity?.Name ?? string.Empty;

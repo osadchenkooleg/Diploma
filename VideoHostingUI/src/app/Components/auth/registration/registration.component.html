@@ -1,0 +1,52 @@
+<mat-card name="form" *ngIf="!isLoggedIn">
+    <mat-form-field class="example-form-field">
+      <mat-label>First name</mat-label>
+      <input type="text" matInput placeholder="username" #firstname>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Last name</mat-label>
+      <input type="text" matInput placeholder="username" #lastname>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput #password>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Confirm Password</mat-label>
+      <input type="password" matInput #confirmpassword>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Phone number</mat-label>
+      <input type="password" matInput #phoneNumber>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Faculty</mat-label>
+      <input type="password" matInput #faculty>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Group</mat-label>
+      <input type="password" matInput #group>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input #emailform matInput placeholder="pat@example.com" [formMethod]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <button mat-flat-button color="primary" 
+  
+    (click)='register({ 
+        email: emailform.value,
+        password: password.value, 
+        passwordConfirm: 
+        confirmpassword.value, 
+        phoneNumber: phoneNumber.value, 
+        firstname: firstname.value, 
+        surname: lastname.value, 
+        faculty: faculty.value, 
+        group: group.value, 
+        sex: true })'>Register</button>
+
+<!-- <button mat-stroked-button color="primary" [routerLink]="['/register']" 
+routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">Register</button> -->
+  </mat-card>
+  
