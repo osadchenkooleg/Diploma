@@ -75,4 +75,8 @@ export class AuthService {
   getUserId():string|null{
     return localStorage.getItem(USERID);
   }
+
+  getToken():string|null{
+    return localStorage.getItem(ACCESS_TOKEN_KEY);
+  }
 }

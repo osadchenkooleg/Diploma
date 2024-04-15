@@ -6,6 +6,8 @@ import { User } from '../../../Models/UserModels/User';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from '../../../Services/auth.service';
 import { HOSTING_API_URL } from '../../../app-injection-tokens';
+import { UserService } from '../../../Services/user.service';
+import { IMAGES_ROUTE } from '../../../constants/wwwroot-constants';
 
 @Component({
   selector: 'app-user-navbar-view',
@@ -27,7 +29,7 @@ export class UserNavbarViewComponent implements OnInit {
     private route: ActivatedRoute,
     @Inject(HOSTING_API_URL) private apiUrl:string,
     private as: AuthService,
-    // private up: UserService
+    private up: UserService
   ) { }
   
   public get isLoggedIn() : boolean{
@@ -35,21 +37,24 @@ export class UserNavbarViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.setUser();
+    this.setUser();
+    console.log(this.user$);
   }
   
-  // setUser(){
-  //   this.route.paramMap.subscribe(params => {
-  //     this.user$ = this.up.getMyUser()
-  //     .pipe(
-  //       tap(u =>{
-  //         if(u.photos.length > 0){
-  //           this.profilePhoto = this.apiUrl + u.photopath;
-  //         }
-  //       })
-  //     );
-  //   })
-  // }
+  setUser(){
+    this.route.paramMap.subscribe(params => {
+      this.user$ = this.up.getMyProfile()
+      .pipe(
+        tap(u =>{
+          console.log(u);
+          if(u.photoPath !== null || u.photoPath !== undefined){
+            this.profilePhoto = this.apiUrl + `${IMAGES_ROUTE}/` + u.photoPath;
+            console.log(this.profilePhoto);
+          }
+        })
+      );
+    })
+  }
   logout(){
     this.as.logout();
   }

@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
 
 export class CommentaryApplyModel {
-  userId: string | undefined;
-  content: string | undefined;
-  videoId: UUID | undefined;
+  public userId: string | undefined;
+  public content: string | undefined;
+  public videoId: UUID | undefined;
 }

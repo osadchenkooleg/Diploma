@@ -1,3 +1,39 @@
-:host {
-  display: block;
+.user-navigation-profile{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.user-navigation-profile button{
+  height: 100%;
+  color: white;
+  font-size: 16px;
+}
+
+.item{
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.item:hover{
+  background-color: rgb(218, 218, 218);
+}
+.menu{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.material-symbols-outlined{
+  padding-right: 3px;
+  height: 100%;
+}
+
+.profile-photo{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+  object-fit: cover;
+}
+.profile-btn{
+  display: flex;
+  align-items: center;
 }

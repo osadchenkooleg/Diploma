@@ -2,17 +2,19 @@ import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './Services/auth.service';
 import { MaterialModule } from './material/material.module';
+import { UserNavbarViewComponent } from "./Components/user/user-navbar-view/user-navbar-view.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    MaterialModule,
-    RouterModule
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [
+        RouterOutlet,
+        MaterialModule,
+        RouterModule,
+        UserNavbarViewComponent
+    ]
 })
 export class AppComponent {
   title = 'VideoHostingUI';

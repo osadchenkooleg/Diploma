@@ -1,5 +1,5 @@
 export class VideoApplyModel {
-  UserId: string | undefined;
-  Name: string | undefined;
-  Description: string | undefined;
+  public userId: string | undefined;
+  public name: string | undefined;
+  public description: string | undefined;
 }

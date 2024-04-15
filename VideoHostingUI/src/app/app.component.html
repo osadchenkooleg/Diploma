@@ -1,7 +1,7 @@
 <div>
   @if (isLoggedIn) {
     <mat-toolbar color="primary">
-      <span [routerLink]="['vodeos']" 
+      <span [routerLink]="['videos']" 
       routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">Videos</span>
       <span class="example-spacer"></span>
       
@@ -11,20 +11,12 @@
           <button mat-flat-button color="primary" [routerLink]="['subscriptions']" 
           routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">Subscriptions</button>
           
-          <button mat-flat-button color="primary" [routerLink]="['myprofile']" 
-          routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">User</button>
+          <!-- <button mat-flat-button color="primary" [routerLink]="['myprofile']" 
+          routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">User</button> -->
   
         </div>  
         
-        <div class="auth">
-          <button mat-flat-button color="primary" [routerLink]="['/register']" 
-          routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}" *ngIf="!isLoggedIn">Register</button>
-  
-          <button mat-flat-button color="primary" [routerLink]="['/login']" 
-          routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}" *ngIf="!isLoggedIn">Log in</button>
-        </div>    
-        
-        <!-- <app-user-navbar-view></app-user-navbar-view> -->
+        <app-user-navbar-view></app-user-navbar-view>
 
       </div>
     </mat-toolbar>

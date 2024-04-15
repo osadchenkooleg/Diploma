@@ -1,16 +1,16 @@
 import { UUID } from "crypto";
 
 export class Video {
-  id: UUID | undefined;
-  UserId: string | undefined;
-  Name: string | undefined;
-  DayOfCreation: Date | undefined;
-  Views: number | undefined;
-  VideoPath: string | undefined;
-  PhotoPath: string | undefined;
-  Likes: number | undefined;
-  Dislikes: number | undefined;
-  Description: string | undefined;
-  Liked: boolean | undefined;
-  Disliked: boolean | undefined;
+  public id: UUID | undefined;
+  public userId: string | undefined;
+  public name: string | undefined;
+  public dayOfCreation: Date | undefined;
+  public views: number | undefined;
+  public videoPath: string | undefined;
+  public photoPath: string | undefined;
+  public likes: number | undefined;
+  public dislikes: number | undefined;
+  public description: string | undefined;
+  public liked: boolean | undefined;
+  public disliked: boolean | undefined;
 }

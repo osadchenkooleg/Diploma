@@ -1,23 +1,29 @@
-<div class="user-navigation-profile" *ngIf="user$ | async as user">
-  <!-- <button mat-button [matMenuTriggerFor]="beforeMenu">
-    <div class="profile-btn">
-      <img *ngIf="profilePhoto" class="profile-photo" src={{profilePhoto}} alt="profile photo">
-      <img *ngIf="!profilePhoto" class="profile-photo" src="../../../assets/photo/Default_pfp.svg.png" alt="profile photo">
-      {{user.firstName}}
-      {{user.lastName}}
-    </div>    
-  </button> -->
-  <mat-menu #beforeMenu="matMenu" xPosition="before">
-    <div class="menu">
-      <button class="item" mat-menu-item [routerLink]="['/myprofile']" 
-          routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}" *ngIf="isLoggedIn">
-        <mat-icon>account_circle</mat-icon>
-        My Profile
-      </button>
-      <button class="item" mat-menu-item (click)="logout()" *ngIf="isLoggedIn">
-        <mat-icon>exit_to_app</mat-icon>
-        Log out
-      </button>
-    </div>    
-  </mat-menu>
-</div>
+@if (user$ | async; as user) {
+  <div class="user-navigation-profile">
+    <button mat-button [matMenuTriggerFor]="beforeMenu">
+      <div class="profile-btn">
+        @if (profilePhoto) {
+          <img class="profile-photo" src={{profilePhoto}} alt="profile photo">
+        }
+        @if (!profilePhoto) {
+          <img class="profile-photo" src="../../../assets/photo/Default_pfp.svg.png" alt="profile photo">
+        }
+        {{user.name}}
+        {{user.surname}}
+      </div>    
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <div class="menu">
+        <button class="item" mat-menu-item [routerLink]="['/myprofile']" 
+            routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}" *ngIf="isLoggedIn">
+          <mat-icon>account_circle</mat-icon>
+          My Profile
+        </button>
+        <button class="item" mat-menu-item (click)="logout()" *ngIf="isLoggedIn">
+          <mat-icon>exit_to_app</mat-icon>
+          Log out
+        </button>
+      </div>    
+    </mat-menu>
+  </div>
+}

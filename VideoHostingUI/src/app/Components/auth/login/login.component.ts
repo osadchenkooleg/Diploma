@@ -37,13 +37,10 @@ export class LoginComponent {
         complete: () => {
           this.router.navigate(['']);
         }
-        , error: () => {
+        , error: err => {
           alert('Wrong login or email');
-          this.error = 'Wrong login or email';
+          this.error = err.error.message;
         }
       })
-  }
-  logout(){
-    this.as.logout();
   }
 }

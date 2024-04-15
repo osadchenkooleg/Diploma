@@ -22,7 +22,4 @@ export class MyProfileComponent {
     private router: Router,
     // private up: UserService
   ) { }
-  logout(){
-    this.as.logout();
-  }
 }

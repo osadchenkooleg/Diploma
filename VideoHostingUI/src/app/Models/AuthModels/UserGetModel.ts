@@ -1,5 +1,5 @@
 export class UserGetModel {
-  id: string | undefined;
-  userName: string | undefined;
-  email: string | undefined;
+  public id: string | undefined;
+  public userName: string | undefined;
+  public email: string | undefined;
 }

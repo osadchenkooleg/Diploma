@@ -1,6 +1,6 @@
 export class ResetPasswordModel {
-  userId: string | undefined;
-  oldPassword: string | undefined;
-  password: string | undefined;
-  passwordConfirm: string | undefined;
+  public userId: string | undefined;
+  public oldPassword: string | undefined;
+  public password: string | undefined;
+  public passwordConfirm: string | undefined;
 }

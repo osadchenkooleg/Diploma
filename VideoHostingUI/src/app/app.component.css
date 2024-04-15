@@ -1,0 +1,28 @@
+.topnav{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+.topnav button{
+    height: 100%;
+    float: left;
+    color: #f2f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 0%;
+}
+.topnav button:hover{
+    background-color: #2d4496;
+}
+.topnav button.active{
+    background-color: #2d4496;
+}
+span{
+    cursor: pointer;
+    margin-right: 10px;
+}

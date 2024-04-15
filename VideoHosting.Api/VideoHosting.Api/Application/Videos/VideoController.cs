@@ -43,7 +43,7 @@ public class VideoController : BaseController
     }
 
     [HttpGet]
-    [Route("videos/user/{id}")]
+    [Route("video/user/{id}")]
     public async Task<IActionResult> GetVideosOfUser(string id)
     {
         var result = await Mediator.Send(new GetUserVideosQuery(id), HttpContext.RequestAborted);
@@ -51,7 +51,7 @@ public class VideoController : BaseController
     }
 
     [HttpGet]
-    [Route("videos")]
+    [Route("video")]
     public async Task<IActionResult> GetVideosSubscribers()
     {
         var result = await Mediator.Send(new GetSubscribersVideosQuery(User.Identity?.Name ?? string.Empty), HttpContext.RequestAborted);
@@ -59,7 +59,7 @@ public class VideoController : BaseController
     }
 
     [HttpGet]
-    [Route("videos/liked/{id}")]
+    [Route("video/liked/{id}")]
     public async Task<IActionResult> GetLikedVideos(string id)
     {
         var result = await Mediator.Send(new GetLikedVideosQuery(id), HttpContext.RequestAborted);
@@ -67,7 +67,7 @@ public class VideoController : BaseController
     }
 
     [HttpGet]
-    [Route("videos/disliked/{id}")]
+    [Route("video/disliked/{id}")]
     public async Task<IActionResult> GetDislikedVideos(string id)
     {
         var result = await Mediator.Send(new GetDislikedVideosQuery(id), HttpContext.RequestAborted);
@@ -83,7 +83,7 @@ public class VideoController : BaseController
     //}
 
     [HttpGet]
-    [Route("videos/{name}")]
+    [Route("video/{name}")]
     public async Task<IActionResult> GetVideosName(string name)
     {
         var result = await Mediator.Send(new GetVideosByName(name, User.Identity?.Name ?? string.Empty), HttpContext.RequestAborted);

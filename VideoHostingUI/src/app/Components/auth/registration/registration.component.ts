@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserApplyModel } from '../../../Models/AuthModels/UserApplyModel';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../../Services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material/material.module';
 
 @Component({
@@ -11,7 +11,8 @@ import { MaterialModule } from '../../../material/material.module';
   standalone: true,
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css',
