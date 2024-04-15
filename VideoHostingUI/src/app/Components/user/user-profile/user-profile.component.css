@@ -1,0 +1,59 @@
+:root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.profile-photo{
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profile-info{
+  margin: 15px;
+  font-size: 16px;
+  
+}
+.user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.main-section {
+  width: 70%;
+  align-self: center;
+}
+.tabs{
+  margin-bottom: 10px;
+}
+
+mat-divider{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.space{
+  margin-top: 10px;
+}
+
+.user-manage-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-manage-button{
+  display: flex;
+  justify-content: left;
+}

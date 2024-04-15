@@ -1,6 +1,7 @@
 export class User {
   public id: string | undefined;
   public name: string | undefined;
+  public email: string | undefined;
   public surname: string | undefined;
   public faculty: string | undefined;
   public group: string | undefined;

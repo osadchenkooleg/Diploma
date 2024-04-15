@@ -37,7 +37,6 @@ public class CreateUserCommand : IRequest<Response<UserGetModel>>
 
         public override async Task<Response<UserGetModel>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var jwtOptions = new ConnectionStringOptions(_configuration);
             var model = request.UserApplyModel;
             
             var user = new User()
@@ -52,7 +51,7 @@ public class CreateUserCommand : IRequest<Response<UserGetModel>>
                 Sex = model.Sex
             };
 
-            var roles = new List<string> { DefaultUserRole, AdminRole };
+            var roles = new List<string> { DefaultUserRole };
             
             var identityResult = await _userManager.CreateAsync(user, model.Password);
             if (identityResult.Succeeded)

@@ -1,3 +1,53 @@
 :host {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+mat-card{
+  width: 65vw;
+  gap: 3vh;
+}
+
+mat-form-field{
+  width: 75%;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-title{
+  margin-top: 3vh;
+}
+
+mat-card-content{
+  gap: 0vh;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.registration-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
 }

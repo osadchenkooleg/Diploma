@@ -2,11 +2,11 @@
   <div class="user-navigation-profile">
     <button mat-button [matMenuTriggerFor]="beforeMenu">
       <div class="profile-btn">
-        @if (profilePhoto) {
+        @if (profilePhoto !== null && profilePhoto !== undefined && profilePhoto !== "") {
           <img class="profile-photo" src={{profilePhoto}} alt="profile photo">
         }
-        @if (!profilePhoto) {
-          <img class="profile-photo" src="../../../assets/photo/Default_pfp.svg.png" alt="profile photo">
+        @else {
+          <img class="profile-photo" src="../../../../assets/photo/Default_pfp.png" alt="profile photo">
         }
         {{user.name}}
         {{user.surname}}

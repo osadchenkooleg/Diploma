@@ -10,7 +10,7 @@ import { DOCUMENT } from '@angular/common';
 
 
 export const ACCESS_TOKEN_KEY = 'hosting_api_token';
-export const USERID = 'userid';
+export const USERID = 'userId';
 export const IS_ADMIN = 'is_admin';
 
 @Injectable({
@@ -36,10 +36,9 @@ export class AuthService {
       tap(token => {
         localStorage.setItem(ACCESS_TOKEN_KEY, token.token);
         
-        localStorage.setItem(USERID, this.decodeToken().nameid);
+        localStorage.setItem(USERID, this.decodeToken().unique_name);
 
         var role = this.decodeToken().role;
-        console.log(role);
         if(role !== null && role.includes("Admin"))
           localStorage.setItem(IS_ADMIN, "true");
         else

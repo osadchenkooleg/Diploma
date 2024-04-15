@@ -21,6 +21,7 @@ public static class UserMapper
         {
             Id = user.Id,
             Name = user.Name,
+            Email = user.Email ?? string.Empty,
             Surname = user.Surname,
             Faculty = user.Faculty,
             Group = user.Group,

@@ -38,7 +38,6 @@ export class UserNavbarViewComponent implements OnInit {
 
   ngOnInit() {
     this.setUser();
-    console.log(this.user$);
   }
   
   setUser(){
@@ -46,10 +45,8 @@ export class UserNavbarViewComponent implements OnInit {
       this.user$ = this.up.getMyProfile()
       .pipe(
         tap(u =>{
-          console.log(u);
-          if(u.photoPath !== null || u.photoPath !== undefined){
+          if(u.photoPath !== null && u.photoPath !== ""){
             this.profilePhoto = this.apiUrl + `${IMAGES_ROUTE}/` + u.photoPath;
-            console.log(this.profilePhoto);
           }
         })
       );

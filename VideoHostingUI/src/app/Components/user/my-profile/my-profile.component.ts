@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MaterialModule } from '../../../material/material.module';
-import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../Services/auth.service';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { AuthService, USERID } from '../../../Services/auth.service';
+import { HOSTING_API_URL } from '../../../app-injection-tokens';
 
 @Component({
   selector: 'app-my-profile',
@@ -16,10 +17,20 @@ import { AuthService } from '../../../Services/auth.service';
   styleUrl: './my-profile.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyProfileComponent {
+export class MyProfileComponent implements OnInit {
   constructor(
-    private as: AuthService,
+    private route: ActivatedRoute,
     private router: Router,
-    // private up: UserService
+    private as: AuthService,
+    @Inject(HOSTING_API_URL) private apiUrl:string
   ) { }
+
+  ngOnInit() {
+    var userId = localStorage.getItem(USERID);
+    this.router.navigate([`/user/${userId}`], {relativeTo: this.route});
+  }
+
+  logout(){
+    this.as.logout();
+  }
 }
