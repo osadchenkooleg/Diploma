@@ -1,0 +1,58 @@
+mat-divider{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.video-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-form{
+  margin: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap : 15px;
+}
+
+.from-fileds{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap : 15px;
+}
+
+.file-import{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  gap : 10px;
+}
+
+.file-imports{
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  gap : 10px;
+}
+
+.file-imports p {
+  margin: 0;
+}
+
+.videos-list{
+  display: flex;
+  justify-content: center;
+  gap: 5vw;
+}
+
+.item{
+  width: 30vw;
+  /* height: 15vh; */
+}

@@ -15,11 +15,11 @@
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <div class="menu">
         <button class="item" mat-menu-item [routerLink]="['/myprofile']" 
-            routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}" *ngIf="isLoggedIn">
+            routerLinkActive ='active' [routerLinkActiveOptions]="{exact:true}">
           <mat-icon>account_circle</mat-icon>
           My Profile
         </button>
-        <button class="item" mat-menu-item (click)="logout()" *ngIf="isLoggedIn">
+        <button class="item" mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
           Log out
         </button>

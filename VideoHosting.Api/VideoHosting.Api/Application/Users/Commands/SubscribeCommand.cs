@@ -45,6 +45,8 @@ public class SubscribeCommand : IRequest<Response<Unit>>
                 subscriber.Unsubscribe(subscripter);
             }
 
+            await Unit.SaveAsync();
+
             return Success(new Unit());
         }
     }

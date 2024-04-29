@@ -1,0 +1,77 @@
+@if (user$ | async; as user) {
+  <div class="user">
+      <div class="profile-header">
+          @if (profilePhoto !== null && profilePhoto !== undefined && profilePhoto !== "") {
+              <img class="profile-photo" src={{profilePhoto}} alt="profile photo">
+          }
+          @else {
+              <img class="profile-photo" src="../../../../assets/photo/Default_pfp.png" alt="profile photo">
+          }
+          
+          <div class="profile-info">
+          <h2>{{user.name}} {{user.surname}}</h2>
+          <p>Email: {{user.email}}</p>
+          @if (user.group) {
+              <p>Group: {{user.group}}</p>
+          }
+          @if (user.faculty) {
+              <p>Faculty: {{user.faculty}}</p>
+          }
+          @if (user.country) {
+              <p>Group: {{user.country}}</p>
+          }
+  
+        </div>   
+      </div> 
+      @if (isAuthor) {
+        <div>
+          <button class="add-photo" type="button" mat-raised-button color="primary" (click)="fileInput.click(); onAddPhoto()">Choose File</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" accept="image/png, image/jpeg" multiple>
+        </div>
+
+        <mat-card name="form">
+            <mat-card-title>Change user info </mat-card-title>
+            
+            <mat-card-content class="content">
+                <div class="cange-info-form">
+                    <mat-form-field class="example-form-field">
+                        <mat-label>First name</mat-label>
+                        <input type="text" matInput placeholder="username" #firstname>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Last name</mat-label>
+                        <input type="text" matInput placeholder="username" #lastname>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Phone number</mat-label>
+                        <input type="text" matInput #phoneNumber>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Faculty</mat-label>
+                        <input type="text" matInput #faculty>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-form-field">
+                        <mat-label>Group</mat-label>
+                        <input type="text" matInput #group>
+                    </mat-form-field>
+                </div>
+                
+                <div class="buttons">
+                    <button mat-flat-button color="primary"
+                    (click)='updateMyProfile(
+                    firstname.value,
+                    lastname.value,
+                    faculty.value,
+                    group.value,
+                    true)'>Save Changes</button>
+                </div>
+                
+            </mat-card-content>
+        </mat-card>
+      }
+  </div>
+}

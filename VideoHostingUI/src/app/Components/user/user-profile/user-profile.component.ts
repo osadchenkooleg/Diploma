@@ -10,26 +10,30 @@ import { AuthService } from '../../../Services/auth.service';
 import { HOSTING_API_URL } from '../../../app-injection-tokens';
 import { IMAGES_ROUTE } from '../../../constants/wwwroot-constants';
 import { MaterialModule } from '../../../material/material.module';
+import { FileRouteService } from '../../../Services/file-route.service';
+import { VideoListComponent } from "../../video/video-list/video-list.component";
 
 @Component({
-  selector: 'app-user-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule
-  ],
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-user-profile',
+    standalone: true,
+    templateUrl: './user-profile.component.html',
+    styleUrl: './user-profile.component.css',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CommonModule,
+        MaterialModule,
+        RouterModule,
+        VideoListComponent
+    ]
 })
 export class UserProfileComponent implements OnInit {
   profilePhoto:string|null = null;
   isAdmin:boolean = false;
   isMyProfile:boolean = false;
+  isFolowing:boolean = false;
 
   isEditing:boolean = false;
-
+  userId: string = "";
   user$: Observable<User> | undefined;
   userVideos: Video[] = []; 
   userLikedVideos: Video[] = []; 
@@ -42,7 +46,8 @@ export class UserProfileComponent implements OnInit {
     @Inject(HOSTING_API_URL) private apiUrl:string,
     private up: UserService,
     private vs: VideoService,
-    private auths:AuthService
+    private auths:AuthService,
+    private frs:FileRouteService
   ) { }
 
   ngOnInit() {
@@ -51,31 +56,40 @@ export class UserProfileComponent implements OnInit {
     this.isAdmin = this.auths.isAdmin()
   }
   setUser(){
-    let userId = "";
     this.route.paramMap.subscribe(params => {
-      userId = params.get('userId')!;
-      this.user$ = this.up.getUser(userId)
+      this.userId = params.get('userId')!;
+      this.user$ = this.up.getUser(this.userId)
       .pipe( 
         tap(u => {
-          console.log(u);
           if(u.id === this.auths.getUserId()){
             this.isMyProfile = true;
           }
-          if(u.photoPath !== null && u.photoPath !== ""){
-            this.profilePhoto = this.apiUrl + `${IMAGES_ROUTE}/` + u.photoPath;
-          }          
+          if(u.photoPath !== null && u.photoPath !== undefined && u.photoPath !== ""){
+            this.profilePhoto = this.frs.getImageRoute(u.photoPath);
+          }   
+          this.isFolowing = u.doSubscribed;       
         })
       );
-      this.vs.GetVideosOfUser(userId).subscribe( result =>{
+      this.vs.GetVideosOfUser(this.userId).subscribe( result =>{
         this.userVideos = result;
       });
-      this.vs.GetLikedVideos(userId).subscribe( result =>{
+      this.vs.GetLikedVideos(this.userId).subscribe( result =>{
         this.userLikedVideos = result;
       });
-      this.vs.GetDislikedVideos(userId).subscribe( result =>{
+      this.vs.GetDislikedVideos(this.userId).subscribe( result =>{
         this.userDislikedVideos = result;
       });
     })
   }
   
+  getUserVideos(){
+    this.vs.GetVideosOfUser(this.userId).subscribe( result =>{
+      this.userVideos = result;
+    });
+  }
+
+  subscribe(){
+    this.up.subscribeUser(this.userId);
+    this.isFolowing = !this.isFolowing
+  }
 }

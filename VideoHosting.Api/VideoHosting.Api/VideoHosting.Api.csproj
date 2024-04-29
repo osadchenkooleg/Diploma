@@ -46,6 +46,7 @@
     <Folder Include="UsersContent\UsersVideos\" />
     <Folder Include="UsersContent\UsersPhotos\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\videoimages\" />
     <Folder Include="wwwroot\videos\" />
   </ItemGroup>
 

@@ -10,10 +10,10 @@ namespace VideoHosting.Api.Application.Videos.Queries;
 
 public class GetVideosByName : IRequest<Response<IEnumerable<VideoModel>>>
 {
-    public string VideoName { get; }
+    public string? VideoName { get; }
     public string LoggedInUserId { get; }
 
-    public GetVideosByName(string videoName, string loggedInUserId)
+    public GetVideosByName(string? videoName, string loggedInUserId)
     {
         VideoName = videoName;
         LoggedInUserId = loggedInUserId;
@@ -27,7 +27,9 @@ public class GetVideosByName : IRequest<Response<IEnumerable<VideoModel>>>
 
         public override async Task<Response<IEnumerable<VideoModel>>> Handle(GetVideosByName request, CancellationToken cancellationToken)
         {
-            var videos = (await Unit.VideoRepository.GetVideosByName(request.VideoName)).ToList() ?? new List<Video>();
+            var videos = string.IsNullOrWhiteSpace(request.VideoName) 
+                ? (await Unit.VideoRepository.GetVideos()).ToList() ?? new List<Video>()
+                : (await Unit.VideoRepository.GetVideosByName(request.VideoName)).ToList() ?? new List<Video>();
             videos = videos.OrderByDescending(x => x.DayOfCreation).ToList();
             
             var videoModels = videos.Select(v => v.MapToVideoModel())

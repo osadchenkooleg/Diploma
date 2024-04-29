@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 import { HOSTING_API_URL } from './app-injection-tokens';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { ACCESS_TOKEN_KEY } from './Services/auth.service';
-import { BrowserStorageService } from './Services/browse-storage.service';
 import { tokenInterceptor } from './interceptors/Token.interceptor';
 
 export function tokenGetter(){
@@ -36,7 +35,6 @@ export const appConfig: ApplicationConfig = {
         allowedDomains : environment.tokenWhiteListedDomains
       }
     }},
-    JwtHelperService,
-    BrowserStorageService
+    JwtHelperService
   ]
 };

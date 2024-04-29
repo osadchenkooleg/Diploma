@@ -1,9 +1,11 @@
 import { UUID } from "crypto";
 
 export class Commentary {
-  public id: UUID | undefined;
-  public userId: string | undefined;
-  public content: string | undefined;
-  public dayOfCreation: Date | undefined;
-  public videoId: UUID | undefined;
+  constructor(
+    public id: UUID,
+    public userId: string,
+    public content: string,
+    public dayOfCreation: Date,
+    public videoId: UUID
+  ) {}
 }

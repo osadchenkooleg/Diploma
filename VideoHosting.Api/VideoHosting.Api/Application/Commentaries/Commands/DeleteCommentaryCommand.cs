@@ -1,12 +1,14 @@
 ﻿using Hellang.Middleware.ProblemDetails;
 using MediatR;
+using VideoHosting.Api.Application.Commentaries.Mappers;
+using VideoHosting.Api.Application.Commentaries.Models;
 using VideoHosting.Api.Common;
 using VideoHosting.Common.Responses;
 using VideoHosting.Database.Abstraction;
 
 namespace VideoHosting.Api.Application.Commentaries.Commands;
 
-public class DeleteCommentaryCommand : IRequest<Response<Unit>>
+public class DeleteCommentaryCommand : IRequest<Response<CommentaryModel>>
 {
     public Guid Id { get; }
     public string LoggedInUserId { get; }
@@ -19,13 +21,13 @@ public class DeleteCommentaryCommand : IRequest<Response<Unit>>
         IsAdmin = isAdmin;
     }
 
-    public class Handler : BaseHandler<DeleteCommentaryCommand, Unit>
+    public class Handler : BaseHandler<DeleteCommentaryCommand, CommentaryModel>
     {
         public Handler(IUnitOfWork unit) : base(unit)
         {
         }
 
-        public override async Task<Response<Unit>> Handle(DeleteCommentaryCommand request, CancellationToken cancellationToken)
+        public override async Task<Response<CommentaryModel>> Handle(DeleteCommentaryCommand request, CancellationToken cancellationToken)
         {
             var commentary = await Unit.CommentaryRepository.GetCommentaryById(request.Id);
             if (commentary == null)
@@ -38,10 +40,12 @@ public class DeleteCommentaryCommand : IRequest<Response<Unit>>
                 throw new ProblemDetailsException(StatusCodes.Status401Unauthorized, "Unauthorized");
             }
 
+            var result = commentary.MapToCommentaryModel();
+
             Unit.CommentaryRepository.RemoveCommentary(commentary);
             await Unit.SaveAsync();
 
-            return Success(new Unit());
+            return Success(result);
         }
     }
 }

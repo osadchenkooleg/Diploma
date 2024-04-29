@@ -26,8 +26,8 @@ public static class VideoHelper
 
         videoModel.PhotoPath = unit.AppSwitchRepository.GetValue(AppSwitchConstants.VideoPhotoKey) + videoModel.PhotoPath;
         videoModel.VideoPath = unit.AppSwitchRepository.GetValue(AppSwitchConstants.VideoKey) + videoModel.VideoPath;
-        videoModel.Liked = video.Likes.FirstOrDefault(x => x.User == user) == null;
-        videoModel.Disliked = video.Dislikes.FirstOrDefault(x => x.User == user) == null;
+        videoModel.Liked = video.Likes.FirstOrDefault(x => x.User == user) != null;
+        videoModel.Disliked = video.Dislikes.FirstOrDefault(x => x.User == user) != null;
 
         return videoModel;
     }

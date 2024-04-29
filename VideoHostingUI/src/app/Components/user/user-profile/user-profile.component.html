@@ -1,5 +1,5 @@
 @if (user$ | async; as user) {
-    <div class="user">
+  <div class="user">
     <div class="profile-header">
         @if (profilePhoto !== null && profilePhoto !== undefined && profilePhoto !== "") {
             <img class="profile-photo" src={{profilePhoto}} alt="profile photo">
@@ -27,28 +27,34 @@
         @if (isMyProfile) {
             <button [routerLink]="['/user/info',user.id]" class="user-manage-button" mat-raised-button color="primary">
                 <mat-icon>edit</mat-icon>Edit profile info
-              </button>
+            </button>
         }
+        @if (!isMyProfile && !isFolowing) {
+          <button  (click)="subscribe()" class="user-manage-button" mat-raised-button  color="primary">
+            Subscribe
+          </button>
+        }
+        @if (!isMyProfile && isFolowing) {
+          <button (click)="subscribe()" class="user-manage-button" mat-raised-button  color="primary">
+            Unsubscribe
+          </button>
+        }
+        
       </div>    
     </div> 
-    <div class="userEditing" *ngIf="isEditing === true">
-  
-    </div>
     <mat-tab-group class="main-section" *ngIf="isEditing === false">
       <mat-tab label="Videos">    
         <div class="space"></div>  
-        <p>Videos</p>
-        <!-- <app-blog-list (updateBlogsNumber)="updateBlogsNumber($event)" [isAuthor]="isAuthor" [blogs]="user.blogs.reverse()"></app-blog-list> -->
+        <app-video-list [isAuthor]="isMyProfile" [videos]="userVideos" [isAddable]="true" (onVideoAdd)="getUserVideos()"></app-video-list>
       </mat-tab>
+
       <mat-tab label="Liked videos"> 
         <div class="space"></div>  
-        <p>Liked</p>
-        <!-- <app-articles-list [articles]="articles!.reverse()"></app-articles-list> -->
+        <app-video-list [isAuthor]="isMyProfile" [videos]="userLikedVideos"></app-video-list>
       </mat-tab>
+
       <mat-tab label="Disliked videos">
-        <div class="space"></div>  
-        <p>Disliked</p>
-        <!-- <app-photo (updatePhotosNumber)="updatePhotosNumber($event)" [isAuthor]="isAuthor" [isAdmin]="isAdmin" [photos]="user.photos"></app-photo> -->
+        <app-video-list [isAuthor]="isMyProfile" [videos]="userDislikedVideos"></app-video-list>
       </mat-tab>
     </mat-tab-group>   
     

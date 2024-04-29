@@ -1,7 +1,9 @@
 export class UserUpdateModel {
-  public name: string | undefined;
-  public surname: string | undefined;
-  public faculty: string | undefined;
-  public group: string | undefined;
-  public sex: boolean | undefined;
+  constructor(
+    public name:string,
+    public surname: string,
+    public faculty: string,
+    public group: string,
+    public sex: boolean
+  ) {}
 }

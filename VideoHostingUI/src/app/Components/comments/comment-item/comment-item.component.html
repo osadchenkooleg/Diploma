@@ -1,0 +1,22 @@
+<div class="comment-item" *ngIf="comment">
+  <mat-card>
+    <div class="info">
+      <app-user-item class="author" [userId]="comment.userId"></app-user-item>
+      <button mat-icon-button [matMenuTriggerFor]="beforeMenu" *ngIf="isAuthor || isAdmin">
+          <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before" >
+
+        <div class="menu">
+          <button class="item" mat-menu-item (click)="deleteComment()" *ngIf="isAuthor || isAdmin">
+            <mat-icon>close</mat-icon>Delete comment
+          </button>
+        </div>  
+      </mat-menu>
+    </div>   
+
+    <mat-card-content class="content" >
+      <p>{{comment.content}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,55 @@
+@if (video$ | async; as video) {
+  <div class="video">
+    <mat-card class="video-content">
+      <div class="header">
+        <app-user-item class="author" [userId]="video.userId!"></app-user-item>
+      </div>
+      <div class="content">
+        
+      </div>
+    </mat-card>
+
+    <mat-card class="video-commentaries">
+      @if (videoRoute !== null && videoRoute !== undefined && videoRoute !== "") {
+        <video class="video-element" controls>
+          <source src={{videoRoute}} type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      }
+      <div class="video-info">
+        <div class="info-header">
+          <h2 class="name">{{video.name}}</h2>
+          <p class="date">{{video.views}} views</p>
+          <div class="likes-dislikes">
+            @if (isLiked) {
+              <button class="like-button" mat-icon-button>
+                <mat-icon>thumb_up_alt</mat-icon>
+              </button>
+            }
+            @else if(!isLiked) {
+              <button class="like-button" mat-icon-button (click)="likeVideo()">
+                <mat-icon>thumb_up_off_alt</mat-icon>
+              </button>
+            }
+            @if (isDisliked) {
+              <button class="like-button" mat-icon-button>
+                <mat-icon>thumb_down_alt</mat-icon>
+              </button>
+            }
+            @else if(!isDisliked){
+              <button class="like-button" mat-icon-button (click)="dislikeVideo()">
+                <mat-icon>thumb_down_off_alt</mat-icon>
+              </button>
+            }
+          </div>
+        </div>
+      
+        <p class="description">{{video.description}}</p>
+      </div>
+    </mat-card>
+    <mat-card>
+      <app-comment-list [comments]="videoCommentaries" [videoId]="video.id"></app-comment-list>
+    </mat-card>
+    <div class="video-footer"></div>
+  </div>
+}

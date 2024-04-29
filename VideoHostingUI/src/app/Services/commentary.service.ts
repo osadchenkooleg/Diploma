@@ -20,14 +20,14 @@ export class CommentaryService {
   }
 
   getCommentariesByVideoId(videoId: UUID) {
-    return this.http.get<Commentary>(this.hostingUrl + `/${videoId}`);
+    return this.http.get<Commentary[]>(this.hostingUrl + `/${videoId}`);
   }
 
   createCommentary(commentaryApplyModel: CommentaryApplyModel) {
-    this.http.post<Commentary>(this.hostingUrl, commentaryApplyModel);
+    return this.http.post<Commentary>(this.hostingUrl, commentaryApplyModel);
   }
 
-  deleteCommentary(videoId: UUID) {
-    return this.http.delete<Commentary>(this.hostingUrl + `/${videoId}`);
+  deleteCommentary(commentaryId: UUID) {
+    return this.http.delete<Commentary>(this.hostingUrl + `/${commentaryId}`);
   }
 }

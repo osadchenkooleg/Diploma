@@ -83,8 +83,8 @@ public class VideoController : BaseController
     //}
 
     [HttpGet]
-    [Route("video/{name}")]
-    public async Task<IActionResult> GetVideosName(string name)
+    [Route("video/search")]
+    public async Task<IActionResult> GetVideosName([FromQuery] string? name)
     {
         var result = await Mediator.Send(new GetVideosByName(name, User.Identity?.Name ?? string.Empty), HttpContext.RequestAborted);
         return Result(result);

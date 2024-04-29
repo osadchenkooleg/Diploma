@@ -1,0 +1,17 @@
+@if (comments) {
+    <div class="comments-list" >
+        <mat-form-field class="example-full-width">
+          <mat-label>Leave a comment</mat-label>
+          <textarea #commentinput (keydown.enter)="postComment()" [(ngModel)]="commentText" matInput placeholder="For examlple. It makes me feel..."></textarea>
+          <button class="send-button" mat-raised-button color="primary" (click)="postComment()">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+        <div class="list" *ngFor="let comment of comments">
+          <div class="comment-item" *ngIf="comment">
+            <app-comment-item [comment]="comment" (commentToDelete)="deleteComment($event)"></app-comment-item>
+          </div>
+          <mat-divider></mat-divider>
+        </div>  
+      </div>
+}

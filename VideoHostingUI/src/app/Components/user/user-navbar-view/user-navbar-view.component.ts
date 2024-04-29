@@ -8,6 +8,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { HOSTING_API_URL } from '../../../app-injection-tokens';
 import { UserService } from '../../../Services/user.service';
 import { IMAGES_ROUTE } from '../../../constants/wwwroot-constants';
+import { FileRouteService } from '../../../Services/file-route.service';
 
 @Component({
   selector: 'app-user-navbar-view',
@@ -29,7 +30,8 @@ export class UserNavbarViewComponent implements OnInit {
     private route: ActivatedRoute,
     @Inject(HOSTING_API_URL) private apiUrl:string,
     private as: AuthService,
-    private up: UserService
+    private up: UserService,
+    private frs:FileRouteService
   ) { }
   
   public get isLoggedIn() : boolean{
@@ -45,9 +47,9 @@ export class UserNavbarViewComponent implements OnInit {
       this.user$ = this.up.getMyProfile()
       .pipe(
         tap(u =>{
-          if(u.photoPath !== null && u.photoPath !== ""){
-            this.profilePhoto = this.apiUrl + `${IMAGES_ROUTE}/` + u.photoPath;
-          }
+          if(u.photoPath !== null && u.photoPath !== undefined && u.photoPath !== ""){
+            this.profilePhoto = this.frs.getImageRoute(u.photoPath);
+          } 
         })
       );
     })

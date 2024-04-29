@@ -1,0 +1,41 @@
+@if (video) {
+  <div class="video-info" >
+    <mat-card>
+      <div class="header">    
+        <app-user-item class="author" [userId]="video.userId!"></app-user-item>
+        @if (isAuthor && isLoggedIn || isAdmin && isLoggedIn) {
+          <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        }
+        <mat-menu #beforeMenu="matMenu" xPosition="before" >
+          <div class="menu">
+            @if (isAuthor && isLoggedIn || isAdmin  && isLoggedIn) {
+              <button class="item" mat-menu-item (click)="deleteVideo()" >
+                <mat-icon>close</mat-icon>Delete video
+              </button>
+            }
+          </div>  
+        </mat-menu>
+      </div>
+      
+      <a [routerLink]="['/video',video.id]">
+        <div class="video-item-content">
+          
+          <div class="photo">
+            @if (videoPhotoPath !== null && videoPhotoPath !== undefined && videoPhotoPath !== "") {
+              <img class="videoIntro" src={{videoPhotoPath}} alt="video inro">
+            }
+          </div>
+          
+          <h2 class="name">{{video.name}}</h2>
+          <div class="description ">
+            <p class="description-text">{{video.description}}</p>
+          </div>
+          
+  
+        </div>
+      </a>
+    </mat-card>
+  </div>
+}

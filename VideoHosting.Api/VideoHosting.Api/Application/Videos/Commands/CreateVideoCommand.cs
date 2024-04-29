@@ -2,13 +2,14 @@
 using MediatR;
 using VideoHosting.Api.Application.Videos.Models;
 using VideoHosting.Api.Common;
+using VideoHosting.Common.Constants;
 using VideoHosting.Common.Responses;
 using VideoHosting.Data.Entities;
 using VideoHosting.Database.Abstraction;
 
 namespace VideoHosting.Api.Application.Videos.Commands;
 
-public class CreateVideoCommand : IRequest<Response<string[]>>
+public class CreateVideoCommand : IRequest<Response<VideoModel>>
 {
     public VideoApplyModel Model { get; }
     public IFormFileCollection Files { get; }
@@ -18,7 +19,7 @@ public class CreateVideoCommand : IRequest<Response<string[]>>
         Model = model;
         Files = files;
     }
-    public class Handler : BaseHandler<CreateVideoCommand, string[]>
+    public class Handler : BaseHandler<CreateVideoCommand, VideoModel>
     {
         protected static string TargetDir => $@"{Directory.GetCurrentDirectory()}\wwwroot\";
         private static readonly string[] JpgFileFormats = new[] {".JPG",  ".jpg"};
@@ -33,7 +34,7 @@ public class CreateVideoCommand : IRequest<Response<string[]>>
         {
         }
 
-        public override async Task<Response<string[]>> Handle(CreateVideoCommand request, CancellationToken cancellationToken)
+        public override async Task<Response<VideoModel>> Handle(CreateVideoCommand request, CancellationToken cancellationToken)
         {
             var files = request.Files;
             var model = request.Model;
@@ -104,7 +105,14 @@ public class CreateVideoCommand : IRequest<Response<string[]>>
             await Unit.VideoRepository.AddVideo(video);
             await Unit.SaveAsync();
 
-            return Success(new [] {photoPath, videoPath});
+            var videoModel = video.MapToVideoModel();
+
+            videoModel.PhotoPath = Unit.AppSwitchRepository.GetValue(AppSwitchConstants.VideoPhotoKey) + videoModel.PhotoPath;
+            videoModel.VideoPath = Unit.AppSwitchRepository.GetValue(AppSwitchConstants.VideoKey) + videoModel.VideoPath;
+            videoModel.Liked = video.Likes.FirstOrDefault(x => x.User == user) == null;
+            videoModel.Disliked = video.Dislikes.FirstOrDefault(x => x.User == user) == null;
+
+            return Success(videoModel);
         }
 
         private string CreatePath(string folder ,string fileName) => $"{TargetDir}{folder}\\{fileName}";

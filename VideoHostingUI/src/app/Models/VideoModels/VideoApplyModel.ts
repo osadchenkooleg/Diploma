@@ -1,5 +1,7 @@
 export class VideoApplyModel {
-  public userId: string | undefined;
-  public name: string | undefined;
-  public description: string | undefined;
+  constructor(
+    public userId: string,
+    public name: string,
+    public description: string,
+  ) {}
 }

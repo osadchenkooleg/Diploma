@@ -1,0 +1,20 @@
+@if (user$ | async; as user) {
+  <div class="user-info">
+    <div class="profile-btn">            
+      <mat-card-header>
+        <mat-card-title><a href={{navigateToProfile()!}} class="profile-link">
+          @if (profilePhoto !== null && profilePhoto !== undefined && profilePhoto !== "") {
+            <img class="profile-photo" src={{profilePhoto}} alt="profile photo">
+          }
+          @else {
+            <img class="profile-photo" src="../../../../assets/photo/Default_pfp.png" alt="profile photo">
+          }
+          <p class="name">
+            {{user.name}}
+            {{user.surname}}
+          </p> 
+        </a>   </mat-card-title>
+      </mat-card-header> 
+    </div> 
+  </div>
+}

@@ -23,7 +23,7 @@ public static class UserHelper
         }
 
         var userDto = user.MapToUserModel();
-        userDto.DoSubscribed = user.Subscribers.FirstOrDefault(x => x.Subscripter == loggedInUser) != null;
+        userDto.DoSubscribed = user.Subscribers.FirstOrDefault(x => x.Subscriber == loggedInUser) != null;
         userDto.Admin = await unit.UserManager.IsInRoleAsync(loggedInUser, "Admin");
         userDto.PhotoPath = unit.AppSwitchRepository.GetValue(AppSwitchConstants.UserPhotoKey) + userDto.PhotoPath;
             

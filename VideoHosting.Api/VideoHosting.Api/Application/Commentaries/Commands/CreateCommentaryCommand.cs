@@ -1,5 +1,6 @@
 ﻿using Hellang.Middleware.ProblemDetails;
 using MediatR;
+using VideoHosting.Api.Application.Commentaries.Mappers;
 using VideoHosting.Api.Application.Commentaries.Models;
 using VideoHosting.Api.Common;
 using VideoHosting.Common.Responses;
@@ -8,7 +9,7 @@ using VideoHosting.Database.Abstraction;
 
 namespace VideoHosting.Api.Application.Commentaries.Commands;
 
-public class CreateCommentaryCommand : IRequest<Response<Unit>>
+public class CreateCommentaryCommand : IRequest<Response<CommentaryModel>>
 {
     public CommentaryApplyModel Model { get; }
 
@@ -17,13 +18,13 @@ public class CreateCommentaryCommand : IRequest<Response<Unit>>
         Model = model;
     }
 
-    public class Handler : BaseHandler<CreateCommentaryCommand, Unit>
+    public class Handler : BaseHandler<CreateCommentaryCommand, CommentaryModel>
     {
         public Handler(IUnitOfWork unit) : base(unit)
         {
         }
 
-        public override async Task<Response<Unit>> Handle(CreateCommentaryCommand request, CancellationToken cancellationToken)
+        public override async Task<Response<CommentaryModel>> Handle(CreateCommentaryCommand request, CancellationToken cancellationToken)
         {
 
             var user = await Unit.UserRepository.GetUserById(request.Model.UserId);
@@ -48,7 +49,7 @@ public class CreateCommentaryCommand : IRequest<Response<Unit>>
             Unit.CommentaryRepository.AddCommentary(commentary);
             await Unit.SaveAsync();
 
-            return Success(new Unit());
+            return Success(commentary.MapToCommentaryModel());
         }
     }
 }

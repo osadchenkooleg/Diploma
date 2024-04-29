@@ -1,0 +1,81 @@
+
+@if (videos) {
+  <div class="video-list">
+    <div class="add-form">
+      <div class="manage-buttons">
+        @if (isAuthor && !isAddingVideo && isAddable) {
+          <button (click)="isAddingVideo = true" class="user-manage-button" mat-raised-button  color="primary">
+            <mat-icon>library_add</mat-icon>Add new video
+          </button>
+        }
+        @if (isAuthor && isAddingVideo) {
+          <button (click)="isAddingVideo = false" class="user-manage-button" mat-raised-button  color="primary">
+            <mat-icon>close</mat-icon>Cancel adding a new video
+          </button>
+        }
+      </div>
+      
+      <div class="form">
+        @if (isAddingVideo) {
+          <div class="from-fileds">
+
+            <mat-form-field class="example-form-field">
+              <mat-label>Video Name</mat-label>
+              <input matInput type="text" [(ngModel)]="videoName">
+              @if (videoName) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="videoName=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+              
+            </mat-form-field>
+          
+            <mat-form-field class="example-form-field">
+              <mat-label>Video Description</mat-label>
+              <input matInput type="text" [(ngModel)]="videoDescription">
+              @if (videoDescription) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="videoDescription=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+            </mat-form-field>
+          </div>
+        }
+       
+        
+        @if (isAddingVideo) {
+          <div class="file-imports">
+            <div class="photo-import file-import">
+              <p>Upload video intro photo </p>
+              <button class="add-photo" type="button" mat-raised-button color="primary" (click)="photoInput.click();">Choose File</button>
+              <input hidden (change)="onImageSelected($event)" #photoInput type="file" id="file" accept="image/png, image/jpeg" multiple>
+              <p>{{selectedImageFile?.name}}</p>
+            </div>
+            <div class="photo-import file-import">
+              <p>Upload video</p>
+              <button class="add-video" type="button" mat-raised-button color="primary" (click)="fileInput.click();">Choose File</button>
+              <input hidden (change)="onVideoSelected($event)" #fileInput type="file" id="file" accept="image/png, image/jpeg" multiple>
+              <p>{{selectedVideoFile?.name}}</p>
+            </div>
+           
+          </div>
+        }
+      </div>
+      
+      
+      @if (isAuthor && isAddingVideo) {
+        <button [disabled]="videoName === '' || videoDescription === '' || selectedVideoFile === null || selectedImageFile === null"  
+      (click)="postVideo()" class="user-manage-button" mat-raised-button  color="primary">
+        <mat-icon>library_add</mat-icon>Add new video
+      </button>
+      }
+    </div>
+    
+    <div class="videos-list">
+      <div class="item" *ngFor="let video of videos">
+        <app-video-item [video]="video" (videoToDelete)="deleteVideo($event)"></app-video-item>
+      </div>  
+    </div>
+    
+  </div>
+}

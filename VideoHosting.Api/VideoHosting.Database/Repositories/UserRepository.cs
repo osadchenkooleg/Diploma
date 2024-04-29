@@ -26,6 +26,13 @@ public class UserRepository : IUserRepository
     public async Task<IEnumerable<User>> GetUserBySubName(string str)
     {
         str = str.ToLower();
+
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            return await _context.Users
+                .ToListAsync();
+        }
+
         return await _context.Users
             .Where(x => x.Name.ToLower().Contains(str) || x.Surname.ToLower().Contains(str) || (x.Name + x.Surname)
                 .ToLower()

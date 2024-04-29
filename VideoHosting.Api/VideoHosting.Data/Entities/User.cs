@@ -85,7 +85,7 @@ public class User : IdentityUser
         var sub = Subscriptions.FirstOrDefault(x => x.Subscripter == user);
         if (sub != null)
         {
-            Subscribers.Remove(sub);
+            Subscriptions.Remove(sub);
         }
     }
 }

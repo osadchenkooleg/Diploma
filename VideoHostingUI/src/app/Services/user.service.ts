@@ -26,16 +26,15 @@ export class UserService {
   addPhoto(file: File) {
     const formData = new FormData(); 
     formData.append("file", file, file.name);
-
-    this.http.post(this.hostingUrl + `addPhoto`, formData);
+    return this.http.post(this.hostingUrl + `addPhoto`, formData);
   }
 
   subscribeUser(userId: string) {
-    this.http.put(this.hostingUrl + `subscribe/${userId}`, null);
+    this.http.put(this.hostingUrl + `subscribe/${userId}`, null).subscribe();
   }
 
   updateUser(userUpdateModel: UserUpdateModel) {
-    this.http.put(this.hostingUrl + `updateUser`, userUpdateModel);
+    return this.http.put(this.hostingUrl + `updateUser`, userUpdateModel);
   }
 
   getUser(id: string) {

@@ -17,12 +17,15 @@ export class VideoService {
       this.hostingUrl = apiUrl + 'api/Video/';
   }
 
-  addVideo(videoApplyModel: VideoApplyModel) {
-    return this.http.post<string[]>(this.hostingUrl + `video`, videoApplyModel);
+  addVideo(videoApplyModel: VideoApplyModel, video: File, videoImage: File) {
+    const formData = new FormData(); 
+    formData.append("file", video, video.name);
+    formData.append("file", videoImage, videoImage.name);
+    return this.http.post<Video>(this.hostingUrl + `video?userId=${videoApplyModel.userId}&name=${videoApplyModel.name}&description=${videoApplyModel.description}`, formData );
   }
 
   deleteVideo(id: UUID) {
-    this.http.delete(this.hostingUrl + `video/${id}`);
+    return this.http.delete(this.hostingUrl + `video/${id}`);
   }
 
   getVideoById(id: UUID) {
@@ -33,7 +36,7 @@ export class VideoService {
     return this.http.get<Video[]>(this.hostingUrl + `video/user/${userId}`);
   }
 
-  GetVideosSubscribers(email: string) {
+  GetVideosSubscribers() {
     return this.http.get<Video[]>(this.hostingUrl + `video`);
   }
 
@@ -46,14 +49,14 @@ export class VideoService {
   }
 
   GetVideosName(videoName: string){
-    return this.http.get<Video[]>(this.hostingUrl + `video/${videoName}`);
+    return this.http.get<Video[]>(this.hostingUrl + `video/search?name=${videoName}`);
   }
 
   PutLike(videoId: UUID) {
-    this.http.put(this.hostingUrl + `like/${videoId}`, undefined);
+    return this.http.put(this.hostingUrl + `like/${videoId}`, undefined);
   }
 
   PutDislike(videoId: UUID){
-    this.http.put(this.hostingUrl + `dislike/${videoId}`, undefined);
+    return this.http.put(this.hostingUrl + `dislike/${videoId}`, undefined);
   }
 }

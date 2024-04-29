@@ -8,7 +8,7 @@ using VideoHosting.Database.Abstraction;
 
 namespace VideoHosting.Api.Application.Commentaries.Queries;
 
-public class GetByVideoIdQuery : IRequest<Response<CommentaryModel>>
+public class GetByVideoIdQuery : IRequest<Response<IEnumerable<CommentaryModel>>>
 {
     public Guid Id { get; set; }
 
@@ -17,21 +17,25 @@ public class GetByVideoIdQuery : IRequest<Response<CommentaryModel>>
         Id = id;
     }
 
-    public class Handler : BaseHandler<GetByVideoIdQuery, CommentaryModel>
+    public class Handler : BaseHandler<GetByVideoIdQuery, IEnumerable<CommentaryModel>>
     {
         public Handler(IUnitOfWork unit) : base(unit)
         {
         }
 
-        public override async Task<Response<CommentaryModel>> Handle(GetByVideoIdQuery request, CancellationToken cancellationToken)
+        public override async Task<Response<IEnumerable<CommentaryModel>>> Handle(GetByVideoIdQuery request, CancellationToken cancellationToken)
         {
-            var commentary = await Unit.CommentaryRepository.GetCommentaryById(request.Id);
-            if (commentary == null)
+            var video = await Unit.VideoRepository.GetVideoById(request.Id);
+            
+            if (video == null)
             {
-                throw new ProblemDetailsException(StatusCodes.Status404NotFound, "Commentary doesn't exist");
+                throw new ProblemDetailsException(StatusCodes.Status404NotFound, "Video doesn't exist");
             }
             
-            return Success(commentary.MapToCommentaryModel());
+            var commentaries = video.Commentaries;
+            var result = commentaries.Select(x => x.MapToCommentaryModel());
+
+            return Success(result);
         }
     }
 }

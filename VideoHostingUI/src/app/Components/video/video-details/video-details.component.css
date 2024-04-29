@@ -1,0 +1,55 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.video{
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.video-commentaries{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-element{
+  width: 100%;
+}
+
+.video-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1vh;
+}
+
+.video-footer{
+  height: 4vw;
+}
+
+.likes-dislikes{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-radius: 25px;
+  border: 1px solid #707070;
+  gap: 2vw;
+}
+
+.info-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}

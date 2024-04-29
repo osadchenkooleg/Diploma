@@ -1,0 +1,25 @@
+.comments-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.send-button{
+  padding: 0;
+  margin: 0;
+}
+
+.mat-icon{
+  cursor: pointer;
+  margin: 0;
+}
+
+.send-button{
+  margin: 0;
+}
