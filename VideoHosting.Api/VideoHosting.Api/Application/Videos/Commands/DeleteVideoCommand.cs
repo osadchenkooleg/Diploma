@@ -43,6 +43,7 @@ public class DeleteVideoCommand : IRequest<Response<Unit>>
             {
                 throw new ProblemDetailsException(StatusCodes.Status404NotFound, "Video not found");
             }
+            
             Unit.VideoRepository.RemoveVideo(video);
             await Unit.SaveAsync();
 

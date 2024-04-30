@@ -212,8 +212,8 @@ namespace VideoHosting.Database.Migrations
                         new
                         {
                             Id = "Admin",
-                            Name = "Administrator",
-                            NormalizedName = "Administrator"
+                            Name = "Admin",
+                            NormalizedName = "Admin"
                         },
                         new
                         {
@@ -328,7 +328,7 @@ namespace VideoHosting.Database.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("UserDislike");
+                    b.ToTable("Dislikes");
                 });
 
             modelBuilder.Entity("VideoHosting.Data.Entities.UserLike", b =>
@@ -343,7 +343,7 @@ namespace VideoHosting.Database.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("UserLike");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("VideoHosting.Data.Entities.UserUser", b =>

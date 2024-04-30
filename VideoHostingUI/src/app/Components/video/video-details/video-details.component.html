@@ -21,26 +21,32 @@
           <h2 class="name">{{video.name}}</h2>
           <p class="date">{{video.views}} views</p>
           <div class="likes-dislikes">
-            @if (isLiked) {
-              <button class="like-button" mat-icon-button>
-                <mat-icon>thumb_up_alt</mat-icon>
-              </button>
-            }
-            @else if(!isLiked) {
-              <button class="like-button" mat-icon-button (click)="likeVideo()">
-                <mat-icon>thumb_up_off_alt</mat-icon>
-              </button>
-            }
-            @if (isDisliked) {
-              <button class="like-button" mat-icon-button>
-                <mat-icon>thumb_down_alt</mat-icon>
-              </button>
-            }
-            @else if(!isDisliked){
-              <button class="like-button" mat-icon-button (click)="dislikeVideo()">
-                <mat-icon>thumb_down_off_alt</mat-icon>
-              </button>
-            }
+            <div class="like">
+              @if (isLiked) {
+                <button class="like-button" mat-icon-button>
+                  <mat-icon>thumb_up_alt</mat-icon><p>{{likes}}</p>
+                </button>
+              }
+              @else if(!isLiked) {
+                <button class="like-button" mat-icon-button (click)="likeVideo()">
+                  <mat-icon>thumb_up_off_alt</mat-icon><p>{{likes}}</p>
+                </button>
+              }
+              
+            </div>
+            <div class="dislike">
+              @if (isDisliked) {
+                <button class="like-button" mat-icon-button>
+                  <mat-icon>thumb_down_alt</mat-icon><p>{{dislikes}}</p>
+                </button>
+              }
+              @else if(!isDisliked){
+                <button class="like-button" mat-icon-button (click)="dislikeVideo()">
+                  <mat-icon>thumb_down_off_alt</mat-icon><p>{{dislikes}}</p>
+                </button>
+              }
+              
+            </div>
           </div>
         </div>
       

@@ -6,6 +6,9 @@
   
 }
 
+p{
+  margin: 0;
+}
 .video{
   width: 80vw;
   display: flex;
@@ -44,6 +47,7 @@
   border-radius: 25px;
   border: 1px solid #707070;
   gap: 2vw;
+  padding: 0 1vw 0 0.7vw;
 }
 
 .info-header{
@@ -52,4 +56,22 @@
   justify-content: space-between;
   align-items: center;
 
+}
+
+.like, .dislike{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5vw;
 }

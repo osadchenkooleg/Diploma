@@ -35,6 +35,20 @@ public class VideoRepository : IVideoRepository
 
     public void RemoveVideo(Video video)
     {
+        if (video.Likes.Any())
+        {
+            foreach (var like in video.Likes)
+            {
+                _context.Likes.Remove(like);
+            }
+        }
+        if (video.Dislikes.Any())
+        {
+            foreach (var like in video.Dislikes)
+            {
+                _context.Dislikes.Remove(like);
+            }
+        }
         _context.Videos.Remove(video);
     }
 }

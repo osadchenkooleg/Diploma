@@ -8,7 +8,7 @@ public class ApplicationContext : IdentityDbContext<User, Role, string>
 {
     public virtual DbSet<Video> Videos { get; set; }
 
-    public virtual DbSet<UserDislike> Likes { get; set; }
+    public virtual DbSet<UserLike> Likes { get; set; }
 
     public virtual DbSet<UserDislike> Dislikes { get; set; }
 

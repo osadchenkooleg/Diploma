@@ -6,6 +6,7 @@ mat-divider{
 .video-list{
   display: flex;
   flex-direction: column;
+  
   gap: 10px;
 }
 
@@ -47,9 +48,10 @@ mat-divider{
 }
 
 .videos-list{
-  display: flex;
+  display: grid;
   justify-content: center;
-  gap: 5vw;
+  grid-template-columns: auto auto auto;
+  gap: 1vw;
 }
 
 .item{
